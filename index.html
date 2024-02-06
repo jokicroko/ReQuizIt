@@ -49,13 +49,14 @@
     </div>
 
     <script src="index.js"></script>
+    <script src="config.js"></script>
     <script>
       // Fetching random facts and displaying it
       var limit = 1;
       $.ajax({
         method: "GET",
         url: "https://api.api-ninjas.com/v1/facts?limit=" + limit,
-        headers: { "X-Api-Key": "dzzQJ7G9XzROmpRii6gXuQ==QortTDtQNTU6fR4G" },
+        headers: { "X-Api-Key": apiKey },
         contentType: "application/json",
         success: function (result) {
           result = factsBox.textContent = result[0].fact + ".";
