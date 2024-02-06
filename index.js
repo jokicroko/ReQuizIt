@@ -96,7 +96,7 @@ async function fetchQuestions() {
 /////////////////////////////////////////////////////////////
 fetchQuestions();
 
-// setInterval(fetchQuestions, 8000);
+setInterval(fetchQuestions, 8000);
 
 sendAnswerBox.addEventListener("click", function () {
   if (sendAnswerBox.value === "Type your answer here") {
