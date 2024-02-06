@@ -51,20 +51,20 @@
     <script src="index.js"></script>
     <script>
       // Fetching random facts and displaying it
-      // var limit = 1;
-      // $.ajax({
-      //   method: "GET",
-      //   url: "https://api.api-ninjas.com/v1/facts?limit=" + limit,
-      //   headers: { "X-Api-Key": "dzzQJ7G9XzROmpRii6gXuQ==QortTDtQNTU6fR4G" },
-      //   contentType: "application/json",
-      //   success: function (result) {
-      //     result = factsBox.textContent = result[0].fact + ".";
-      //     console.log(result);
-      //   },
-      //   error: function ajaxError(jqXHR, textStatus, errorThrown) {
-      //     console.error("Error: ", errorThrown);
-      //   },
-      // });
+      var limit = 1;
+      $.ajax({
+        method: "GET",
+        url: "https://api.api-ninjas.com/v1/facts?limit=" + limit,
+        headers: { "X-Api-Key": "dzzQJ7G9XzROmpRii6gXuQ==QortTDtQNTU6fR4G" },
+        contentType: "application/json",
+        success: function (result) {
+          result = factsBox.textContent = result[0].fact + ".";
+          console.log(result);
+        },
+        error: function ajaxError(jqXHR, textStatus, errorThrown) {
+          console.error("Error: ", errorThrown);
+        },
+      });
     </script>
   </body>
 </html>
