@@ -1,4 +1,5 @@
 "use strict";
+import { transliterate } from "https://cdn.jsdelivr.net/npm/transliteration@2.1.8/dist/browser/bundle.esm.min.js";
 
 // DOM selectors
 
@@ -7,8 +8,10 @@ const sendAnswerBox = document.getElementById("answer");
 const submitBtn = document.getElementById("send-btn");
 const chatBox = document.querySelector(".chat");
 const chatLog = document.querySelector(".chat-log");
+const userPoints = document.getElementById("user-points");
 let answers = [];
 let correctAnswers = [];
+let points = 1;
 
 ////////////////////////////////
 
@@ -28,6 +31,8 @@ const checkAnswers = function () {
     let newMessage = document.createElement("ul");
     newMessage.className = "correct-answer-ul";
     newMessage.textContent = "Correct Answer!";
+    userPoints.textContent = `You: Points ${points}`;
+    points++;
     chatLog.appendChild(newMessage);
   }
 };
@@ -42,11 +47,12 @@ const sendMessage = function () {
   newMessage.textContent = sendAnswerBox.value;
   chatLog.appendChild(newMessage);
 
-  answers.push(newMessage.textContent);
+  // answers.push(newMessage.textContent);
   if (answers.length === 0) {
     answers.push(newMessage.textContent);
   } else if (answers.length > 0) {
-    answers.splice(0, 1);
+    console.log(answers.length);
+    answers.pop();
     answers.push(newMessage.textContent);
   }
   console.log(answers);
@@ -75,10 +81,10 @@ async function fetchQuestions() {
     }
 
     const data = await response.json();
-
     if (correctAnswers.length === 0) {
       console.log(data[0].correctAnswer);
-      correctAnswers.push(data[0].correctAnswer);
+      console.log(transliterate(data[0].correctAnswer));
+      correctAnswers.push(transliterate(data[0].correctAnswer)); // Puts answer to latin letters
       console.log(correctAnswers);
     } else if (correctAnswers.length > 0) {
       correctAnswers.splice(0);
@@ -96,7 +102,7 @@ async function fetchQuestions() {
 /////////////////////////////////////////////////////////////
 fetchQuestions();
 
-setInterval(fetchQuestions, 8000);
+setInterval(fetchQuestions, 10000);
 
 sendAnswerBox.addEventListener("click", function () {
   if (sendAnswerBox.value === "Type your answer here") {
@@ -107,6 +113,7 @@ sendAnswerBox.addEventListener("click", function () {
 submitBtn.addEventListener("click", function () {
   sendMessage();
   clearInput();
+  checkAnswers();
 });
 
 sendAnswerBox.addEventListener("keypress", function (e) {

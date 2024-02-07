@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="script.css" />
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
@@ -37,7 +38,7 @@
         <!-- room div -->
         <div class="room">
           <ul id="live-users">
-            <li>Live user 1</li>
+            <li id="user-points">You: Points</li>
           </ul>
         </div>
         <div class="facts-container">
@@ -48,24 +49,23 @@
       </div>
     </div>
 
-    <script src="index.js"></script>
+    <script type="module" src="index.js"></script>
     <script src="config.js"></script>
     <script>
       // Fetching random facts and displaying it
       var limit = 1;
-      $.ajax({
-        method: "GET",
-        url: "https://api.api-ninjas.com/v1/facts?limit=" + limit,
-        headers: { "X-Api-Key": apiKey },
-        contentType: "application/json",
-        success: function (result) {
-          result = factsBox.textContent = result[0].fact + ".";
-          console.log(result);
-        },
-        error: function ajaxError(jqXHR, textStatus, errorThrown) {
-          console.error("Error: ", errorThrown);
-        },
-      });
+      // $.ajax({
+      //   method: "GET",
+      //   url: "https://api.api-ninjas.com/v1/facts?limit=" + limit,
+      //   headers: { "X-Api-Key": apiKey },
+      //   contentType: "application/json",
+      //   success: function (result) {
+      //     result = factsBox.textContent = result[0].fact + ".";
+      //   },
+      //   error: function ajaxError(jqXHR, textStatus, errorThrown) {
+      //     console.error("Error: ", errorThrown);
+      //   },
+      // });
     </script>
   </body>
 </html>
